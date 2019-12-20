@@ -52,8 +52,6 @@ class PyramidView(QMainWindow):
         stock = board.stock
         self.__stock = stock
         self.__pyramid_cards = []  # Cards from pyramid in linear form.
-        print(self.__stock)
-        print(self.__board.stock)
 
         self.backgroundLeftAddCard = self.ui.stock_previous
         self.foregroundLeftAddCard = self.ui.stock_current  # Card from stock.
@@ -98,7 +96,6 @@ class PyramidView(QMainWindow):
             lab_card.mouseReleaseEvent = self.mouseReleaseEvent
             self.coordinates.append(position)
         self.ui.mousePressEvent = self.mousePressEvent
-        print(len(self.coordinates))
         self.ui.show()
 
     # --- Mouse events. ------------------------------------------------------
@@ -108,14 +105,12 @@ class PyramidView(QMainWindow):
                 and event.y() in range(self.foregroundLeftAddCard.y(),
                                        self.foregroundLeftAddCard.y() +
                                        self.height):
-            print('Hello!')
             self.card = self.__board.stack[-1]
 
             self.current_card = self.foregroundLeftAddCard
             self.last_pos = self.current_card.pos()
             if event.button() == Qt.LeftButton:
                 self.flag = True
-                print('True')
             return
 
         for i in self.coordinates:
@@ -150,7 +145,6 @@ class PyramidView(QMainWindow):
         current_y = current_coords.y()
         if self.card.state == 'Active':
             if self.card.value == 13:
-                print('hi')
                 self.__board.compare(self.card)
                 self.uncover()
 
@@ -161,7 +155,6 @@ class PyramidView(QMainWindow):
                                           i.x() + self.width // 2) and \
                             current_y in range(i.y() - self.height // 2,
                                                i.y() + self.height):
-                        print('hi')
                         self.card2 = \
                             self.__pyramid_cards[self.coordinates.index(i)]
                         self.__board.compare(self.card, self.card2)
